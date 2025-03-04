@@ -33,7 +33,7 @@ public class Controller extends HttpServlet {
             out.println("</body></html>");
         } catch (NumberFormatException e) {
             logger.error("Ошибка преобразования числа", e);
-            out.println("<h1>Ошибка: Введите корректное число</h1>");
+            out.println("<h1>Ошибка: Введите коррпектное число</h1>");
         }
     }
 }
