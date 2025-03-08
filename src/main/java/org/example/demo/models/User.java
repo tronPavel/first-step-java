@@ -3,14 +3,23 @@ package org.example.demo.models;
 
 public class User {
     private int id;
-    private String username;
+    private String login;
     private String password;
-    private String fullName;
+    private String gmail;
+    private String number;
 
-    public User(int id, String username, String password, String fullName) {
+
+    public User(int id, String login, String password) {
         this.id = id;
-        this.username = username;
+        this.login = login;
         this.password = password;
-        this.fullName = fullName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }
