@@ -10,11 +10,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-@WebServlet(value = "/number")
-public class NumberServlet extends HttpServlet {
+@WebServlet("/number")
+public class NumberServlet extends BaseServlet {
     private static final Logger logger = LogManager.getLogger(NumberServlet.class);
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        renderPage(request, response, "Передача числа", "/WEB-INF/views/number.jsp");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             int number = Integer.parseInt(request.getParameter("number"));
             int result = number * 2;
@@ -23,9 +31,7 @@ public class NumberServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             logger.error("Ошибка преобразования числа", e);
             request.setAttribute("error", "Неверные данные");
-        } finally {
-            request.getRequestDispatcher("number.jsp").forward(request, response);
         }
+        renderPage(request, response, "Передача числа", "/WEB-INF/views/number.jsp");
     }
 }
-

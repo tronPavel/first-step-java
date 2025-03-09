@@ -9,11 +9,17 @@ import org.example.demo.services.AuthService;
 import java.io.IOException;
 
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends BaseServlet {
     private AuthService authService = new AuthService();
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        renderPage(request, response, "логин", "/WEB-INF/views/login.jsp");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
@@ -24,8 +30,9 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             response.sendRedirect("profile");
         } else {
+
             request.setAttribute("error", "Неверные учетные данные");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            renderPage(request, response, "логин", "/WEB-INF/views/login.jsp");
         }
 
     }

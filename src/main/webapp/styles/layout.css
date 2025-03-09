@@ -1,0 +1,77 @@
+html, body {
+    height: 100%; /* Задаем высоту html и body на 100% */
+    margin: 0; /* Убираем отступы по умолчанию */
+    display: flex;
+    flex-direction: column;
+    font-family: Arial;
+}
+
+main {
+    flex: 1;
+    margin: 1em auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.25em 0;
+    align-items: center;
+    position: relative;
+}
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 1px;
+    background: rgba(211, 211, 211, 0.7);;
+}
+header p{
+    margin: 0;
+    padding: 0;
+}
+.header__logo{
+    color: gold;
+    font-size: 2em;
+}
+.header__menu-list{
+    list-style: none;
+    display: flex;
+    gap: 1em;
+}
+.header__menu-link{
+    text-decoration: none;
+    color: black;
+    font-size: 1em;
+}
+.header__menu-link.active {
+    color: gold;
+    font-weight: bold;
+}
+.header__menu-link:hover{
+    color: #156;
+    font-weight: bold;
+}
+.footer__text{
+    border-top: dimgrey 1px;
+    font-size: 1em;
+    text-align: center;
+}
+footer{
+    position: relative;
+}
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 1px;
+    background: rgba(211, 211, 211, 0.7);;
+}

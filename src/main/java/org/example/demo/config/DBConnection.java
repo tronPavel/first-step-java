@@ -4,24 +4,41 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
-    private static Connection connection;
+//public class DBConnection {
+//    private static Connection connection;
+//
+//    static {
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            connection = DriverManager.getConnection(
+//                    DBConfig.get("db.url"),
+//                    DBConfig.get("db.username"),
+//                    DBConfig.get("db.password")
+//            );
+//        } catch (ClassNotFoundException | SQLException e) {
+//            throw new RuntimeException("Ошибка подключения к базе данных", e);
+//        }
+//    }
+//
+//    public static Connection getConnection() {
+//        System.out.println("Получаем соединение с БД");
+//        return connection;
+//    }
+//}
 
-    static {
+public class DBConnection {
+
+    public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
+            return DriverManager.getConnection(
                     DBConfig.get("db.url"),
                     DBConfig.get("db.username"),
                     DBConfig.get("db.password")
             );
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Ошибка подключения к базе данных", e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Ошибка загрузки драйвера", e);
         }
-    }
-
-    public static Connection getConnection() {
-        return connection;
     }
 }
 

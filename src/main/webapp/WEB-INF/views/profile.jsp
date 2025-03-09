@@ -7,12 +7,8 @@
     return;
   }
 %>
-<html>
-<head>
-  <title>Профиль</title>
-</head>
-<body>
-<p>дарова <%= user.getLogin() %></p>
+
+<p>welcome <%= user.getLogin() %></p>
 <a href="logout">Выйти</a>
-</body>
-</html>
+
+
