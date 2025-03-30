@@ -1,4 +1,4 @@
-package org.example.demo.controllers;
+package org.example.demo.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -13,3 +13,4 @@ public abstract class BaseServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/views/layout.jsp").forward(request, response);
     }
 }
+

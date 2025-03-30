@@ -1,4 +1,4 @@
-package org.example.demo.controllers;
+package org.example.demo.controller;
 
 import java.io.*;
 
@@ -34,4 +34,5 @@ public class NumberServlet extends BaseServlet {
         }
         renderPage(request, response, "Передача числа", "/WEB-INF/views/number.jsp");
     }
+
 }

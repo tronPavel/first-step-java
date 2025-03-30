@@ -1,4 +1,4 @@
-package org.example.demo.models;
+package org.example.demo.model;
 
 
 public class User {

@@ -16,12 +16,12 @@
             <ul class="header__menu-list">
                 <%
                     Object user = session.getAttribute("user");
-                    if (user == null) { // Гость
+                    if (user == null) {
                 %>
                 <li class="header__menu-item"> <a class="header__menu-link" href="login">log in</a></li>
                 <li class="header__menu-item"> <a class="header__menu-link" href="signup">sign up</a></li>
                 <%
-                } else { // Авторизованный пользователь
+                } else {
                 %>
                 <li class="header__menu-item"> <a class="header__menu-link" href="profile">Профиль</a></li>
                 <li class="header__menu-item"> <a class="header__menu-link" href="logout">Выйти</a></li>

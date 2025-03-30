@@ -1,10 +1,10 @@
-package org.example.demo.controllers;
+package org.example.demo.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.example.demo.models.User;
-import org.example.demo.services.AuthService;
+import org.example.demo.model.User;
+import org.example.demo.service.AuthService;
 
 import java.io.IOException;
 

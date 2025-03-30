@@ -1,14 +1,15 @@
-package org.example.demo.services;
+package org.example.demo.service;
 
 import jakarta.mail.MessagingException;
 import org.example.demo.dao.UserDAO;
-import org.example.demo.models.User;
+import org.example.demo.model.User;
 import org.mindrot.jbcrypt.BCrypt;
+import java.util.UUID;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
-import static org.example.demo.services.MailService.sendConfirmationEmail;
+import static org.example.demo.service.MailService.sendConfirmationEmail;
 
 public class AuthService {
     private UserDAO userDAO = new UserDAO();
@@ -34,7 +35,7 @@ public class AuthService {
 
         String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
 
-        String token = java.util.UUID.randomUUID().toString();
+        String token = UUID.randomUUID().toString();
 
         User user = new User(login, hashedPassword, email,token);
         userDAO.createUser(user);
@@ -44,8 +45,6 @@ public class AuthService {
 
     public boolean confirmRegistration(String token) throws SQLException {
         User user = userDAO.getUserByToken(token);
-        System.out.println("user in confim");
-        System.out.println(user.getStatus());
 
         if (user != null && "PENDING".equals(user.getStatus())) {
             userDAO.activateUser(user.getId());

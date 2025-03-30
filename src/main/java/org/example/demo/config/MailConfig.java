@@ -10,7 +10,7 @@ public class MailConfig {
     static {
         try (InputStream input = MailConfig.class.getClassLoader().getResourceAsStream("mail.properties")) {
             if (input == null) {
-                throw new RuntimeException("Не найден config.properties");
+                throw new RuntimeException("Не найден mail.properties");
             }
             properties.load(input);
         } catch (IOException e) {

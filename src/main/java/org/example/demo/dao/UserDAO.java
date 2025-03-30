@@ -1,7 +1,7 @@
 package org.example.demo.dao;
 
-import org.example.demo.config.DBConnection;
-import org.example.demo.models.User;
+import org.example.demo.service.DBConnection;
+import org.example.demo.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     public void createUser(User user) throws SQLException {
-        String sql = "INSERT INTO user (email, password, login, status, confirmation_token) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (email, password, login, status, confirmation_token) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getEmail());
@@ -33,13 +33,12 @@ public class UserDAO {
     }
 
     public User getUserByToken(String token) throws SQLException {
-        String sql = "SELECT * FROM user WHERE confirmation_token = ?";
+        String sql = "SELECT * FROM users WHERE confirmation_token = ?";
         try (Connection conn = DBConnection.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, token);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
-                        System.out.println("user founded " + rs.getString("login"));
                         return parseUserFromDB(rs);
                     }
                 }
@@ -52,7 +51,7 @@ public class UserDAO {
 
 
     public void activateUser(int userId) throws SQLException {
-        String sql = "UPDATE user SET status = 'ACTIVE', confirmation_token = NULL WHERE id = ?";
+        String sql = "UPDATE users SET status = 'ACTIVE', confirmation_token = NULL WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
@@ -70,12 +69,13 @@ public class UserDAO {
                 rs.getString("confirmation_token")
         );
     }
+
     private User findUserByColumn(String columnName, String value) {
         if (!"login".equals(columnName) && !"email".equals(columnName)) {
             throw new IllegalArgumentException("Invalid column name: " + columnName);
         }
 
-        String sql = "SELECT id, login, password, email, status, confirmation_token FROM user WHERE " + columnName + " = ?";
+        String sql = "SELECT id, login, password, email, status, confirmation_token FROM users WHERE " + columnName + " = ?";
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
