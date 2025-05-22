@@ -10,19 +10,32 @@ import java.sql.SQLException;
 
 public class UserDAO {
 
-    public void createUser(User user) throws SQLException {
-        String sql = "INSERT INTO users (email, password, login, status, confirmation_token) VALUES (?, ?, ?, ?, ?)";
+    public void createUser(User user, String hashedPassword) throws SQLException {
+        String sql = "INSERT INTO users (email, login, status, confirmation_token, password) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getLogin());
-            stmt.setString(4, user.getStatus());
-            stmt.setString(5, user.getConfirmToken());
+            stmt.setString(2, user.getLogin());
+            stmt.setString(3, user.getStatus());
+            stmt.setString(4, user.getConfirmToken());
+            stmt.setString(5, hashedPassword);
             stmt.executeUpdate();
         }
     }
 
+    public String getPasswordByLogin(String login) throws SQLException {
+        String sql = "SELECT password FROM users WHERE login = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("password");
+                }
+            }
+        }
+        return null;
+    }
 
     public User getUserBylogin(String login) {
        return findUserByColumn("login", login);
@@ -49,6 +62,19 @@ public class UserDAO {
         return null;
     }
 
+    public User getUserById(int id) throws SQLException {
+        String sql = "SELECT id, login, email, status, confirmation_token FROM users WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return parseUserFromDB(rs);
+                }
+            }
+        }
+        return null;
+    }
 
     public void activateUser(int userId) throws SQLException {
         String sql = "UPDATE users SET status = 'ACTIVE', confirmation_token = NULL WHERE id = ?";
@@ -63,7 +89,6 @@ public class UserDAO {
         return new User(
                 rs.getInt("id"),
                 rs.getString("login"),
-                rs.getString("password"),
                 rs.getString("email"),
                 rs.getString("status"),
                 rs.getString("confirmation_token")

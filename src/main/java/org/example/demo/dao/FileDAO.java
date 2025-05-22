@@ -18,6 +18,8 @@ public class FileDAO {
             ps.setInt(4, file.getPostId());
             ps.executeUpdate();
         }
+
+
     }
 
     public List<File> getFilesByPostId(int postId) throws SQLException {
@@ -40,4 +42,32 @@ public class FileDAO {
         }
         return files;
     }
+    public File getFileById(int id) throws SQLException {
+        String sql = "SELECT * FROM files WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new File(
+                        rs.getInt("id"),
+                        rs.getString("file_name"),
+                        rs.getBytes("file_data"),
+                        rs.getString("content_type"),
+                        rs.getInt("post_id"),
+                        rs.getTimestamp("uploaded_at")
+                );
+            }
+        }
+        return null;
+    }
+
+//    public void deleteFilesByPostId(int postId) throws SQLException {
+//        String sql = "DELETE FROM files WHERE post_id = ?";
+//        try (Connection conn = DBConnection.getConnection();
+//             PreparedStatement ps = conn.prepareStatement(sql)) {
+//            ps.setInt(1, postId);
+//            ps.executeUpdate();
+//        }
+//    }
 }

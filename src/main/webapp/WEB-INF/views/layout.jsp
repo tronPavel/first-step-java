@@ -15,8 +15,7 @@
         <nav class="header__menu">
             <ul class="header__menu-list">
                 <%
-                    Object user = session.getAttribute("user");
-                    if (user == null) {
+                    if (session.getAttribute("userId") == null) {
                 %>
                 <li class="header__menu-item"> <a class="header__menu-link" href="login">log in</a></li>
                 <li class="header__menu-item"> <a class="header__menu-link" href="signup">sign up</a></li>
@@ -24,6 +23,8 @@
                 } else {
                 %>
                 <li class="header__menu-item"> <a class="header__menu-link" href="profile">Профиль</a></li>
+                <li class="header__menu-item"> <a class="header__menu-link" href="posts">Посты</a></li>
+
                 <li class="header__menu-item"> <a class="header__menu-link" href="logout">Выйти</a></li>
                 <%
                     }
