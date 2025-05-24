@@ -6,13 +6,14 @@ public class User {
     private String email;
     private String status;
     private String confirmToken;
+    private String role;
 
-    // Конструктор для создания нового пользователя (регистрация)
     public User(String login, String email, String confirmToken) {
         this.login = login;
         this.email = email;
         this.status = "PENDING";
         this.confirmToken = confirmToken;
+        this.role = "USER";
     }
 
     public User(int id, String login, String email, String status, String confirmToken) {
@@ -21,6 +22,7 @@ public class User {
         this.email = email;
         this.status = status;
         this.confirmToken = confirmToken;
+        this.role = "USER";
     }
 
     public int getId() { return id; }
@@ -28,6 +30,7 @@ public class User {
     public String getEmail() { return email; }
     public String getStatus() { return status; }
     public String getConfirmToken() { return confirmToken; }
-
+    public String getRole() { return role; }
     public void setStatus(String status) { this.status = status; }
+    public void setRole(String role) { this.role = role; }
 }

@@ -9,7 +9,7 @@ public class Post {
     private String content;
     private int userId;
     private Timestamp createdAt;
-    private List<File> files; // Список файлов, привязанных к посту
+    private List<File> files;
 
     public Post() {}
     public Post(int id, String title, String content, int userId, Timestamp createdAt) {

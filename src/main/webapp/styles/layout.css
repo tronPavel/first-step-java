@@ -75,3 +75,155 @@ footer::before {
     height: 1px;
     background: rgba(211, 211, 211, 0.7);;
 }
+
+/* Общие стили для всех страниц */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Стили для контейнера основной разметки */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для заголовков */
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Стили для форм */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button[type="submit"] {
+    align-self: flex-start;
+}
+
+/* Стили для ошибок */
+p[style*="color: red"] {
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+p[style*="color: green"] {
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Стили для ссылок */
+a {
+    color: #3498db;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Стили для списков */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+}
+
+li a {
+    margin-right: 10px;
+}
+
+form[style*="display:inline"] {
+    display: inline;
+    margin-left: 10px;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    textarea,
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

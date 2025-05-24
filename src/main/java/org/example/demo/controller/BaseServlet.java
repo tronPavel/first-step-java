@@ -1,7 +1,9 @@
 package org.example.demo.controller;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -13,4 +15,3 @@ public abstract class BaseServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/views/layout.jsp").forward(request, response);
     }
 }
-
